@@ -49,7 +49,7 @@ if st.button("Predict Power Output"):
     else:
         st.markdown("<span style='color:green'>HIGH → Peak Performance</span>", unsafe_allow_html=True)
 
-# --- Optional: Model Info ---
+# --- Model Info ---
 with st.expander("Model Information"):
     st.write("Features used:", metadata["features"])
     st.write("Performance Metrics:")
