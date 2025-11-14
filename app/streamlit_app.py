@@ -1,12 +1,23 @@
 # streamlit_app.py
 import streamlit as st
 import pandas as pd
+import numpy as np
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
 # --- Load saved objects ---
 best_model = joblib.load("models/wind_power_model.pkl")          # best model (XGBoost or Linear)
 # preprocess_input = joblib.load("models/preprocess_input.pkl")    # preprocessing function
 metadata = joblib.load("models/model_metadata.pkl")              # features + metrics
+
+# --- Preprocessing function ---
+def preprocess_input(df):
+    df = df.copy()
+    df['Wind_Speed_Cubed'] = df['Wind Speed (m/s)'] ** 3
+    df['Dir_Sin'] = np.sin(np.radians(df['Wind Direction (°)']))
+    df['Dir_Cos'] = np.cos(np.radians(df['Wind Direction (°)']))
+    df['Rolling_Speed'] = df['Wind Speed (m/s)']  # for single-point prediction
+    return df[['Wind Speed (m/s)', 'Wind_Speed_Cubed', 'Dir_Sin', 'Dir_Cos', 'Rolling_Speed']]
 
 # --- App Title ---
 st.title("Wind Turbine Power Prediction System")
@@ -44,4 +55,3 @@ with st.expander("Model Information"):
     st.write("Performance Metrics:")
     for model_name, metrics in metadata["metrics"].items():
         st.write(f"{model_name}: RMSE={metrics['RMSE']:.2f}, MAE={metrics['MAE']:.2f}, R²={metrics['R2']:.3f}")
-
