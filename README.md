@@ -63,17 +63,6 @@ The preprocessing function (`preprocess_input.pkl`) handles new user inputs in t
 
 ---
 
-## Deployment (Streamlit)
-- `streamlit_app.py` provides a user interface to:
-  - Input `Wind Speed` and `Wind Direction`
-  - Display predicted power output
-  - Show status (LOW, NORMAL, HIGH) with color-coded display
-  - Optionally expand to see features and performance metrics
-- Example usage: streamlit run streamlit_app.py
-
-
----
-
 ## Requirements
 To install all required libraries, run:
 
