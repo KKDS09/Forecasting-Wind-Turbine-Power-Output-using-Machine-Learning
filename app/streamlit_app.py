@@ -14,7 +14,7 @@ import joblib
 
 # --- Load saved objects ---
 best_model = joblib.load("models/wind_power_model.pkl")          # best model (XGBoost or Linear)
-preprocess_input = joblib.load("models/preprocess_input.pkl")    # preprocessing function
+# preprocess_input = joblib.load("models/preprocess_input.pkl")    # preprocessing function
 metadata = joblib.load("models/model_metadata.pkl")              # features + metrics
 
 # --- App Title ---
